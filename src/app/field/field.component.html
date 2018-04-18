@@ -1,0 +1,14 @@
+<div class="zone">
+  <div
+    class="field_number"
+    *ngFor="let number of ticket.gameNumbers;"
+    [ngClass]="{'selected': number.selected}"
+    (click)="toggleSelected(number)"
+  >
+    <div [style.backgroundColor]="getBg(number.index, number.selected)">
+      {{ number.index }}
+    </div>
+  </div>
+</div>
+<button (click)="random()">random</button>
+

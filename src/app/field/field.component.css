@@ -1,0 +1,25 @@
+.field_number {
+  width: 45px;
+  height: 45px;
+  background: #ebebeb;
+  border: 1px solid #ebebeb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.field_number div{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width:100%;
+}
+
+.field_number.selected {
+  background: forestgreen;
+}
+
+.zone {
+  width: 300px;
+}

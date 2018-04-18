@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { FieldComponent } from './field/field.component';
+import '../assets/combinatorics.js';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FieldComponent
   ],
   imports: [
     BrowserModule
