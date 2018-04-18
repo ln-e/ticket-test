@@ -22,7 +22,6 @@
         "styles.css"
       ],
       "scripts": [
-        "../combinatorics.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
