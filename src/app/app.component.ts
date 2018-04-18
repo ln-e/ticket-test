@@ -83,7 +83,7 @@ export class AppComponent implements DoCheck {
   }
 
   createPermutationArray(array: any[], count: number) {
-    return window['Combinatorics'].combination(array, count);
+    // return window['Combinatorics'].combination(array, count);
   }
 
   getMathCombinationOfASet(k, n) {
