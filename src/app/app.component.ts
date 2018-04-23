@@ -54,8 +54,17 @@ export class AppComponent implements DoCheck {
       console.log('countOfMatchedNumbers', countOfMatchedNumbers, 'countOfProbablyMatchedNumbers', countOfProbablyMatchedNumbers, 'ticket.selected', ticket.selected);
       ticket.selected.forEach((number: GameNumber) => {
         priority[number.index] = Math.max(priority[number.index] || 0, countOfProbablyMatchedNumbers); // минус один потому что  минимальная комбинация чтобы выиграть 2 числа
+        // if (isNaN(priority[number.index])) {
+        //   priority[number.index] = 0;
+        // }
+        // priority[number.index] += countOfProbablyMatchedNumbers; // минус один потому что  минимальная комбинация чтобы выиграть 2 числа
       });
     });
+
+    // for (const prop of priority) {
+    //   priority[prop] /= this.tickets.length;
+    // }
+    console.log('after', priority);
 
     this.priority = priority;
     console.log(priority);

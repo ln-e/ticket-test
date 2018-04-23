@@ -23,3 +23,7 @@
 .zone {
   width: 300px;
 }
+
+:host-context(.matcher) .field_number.selected div {
+  box-shadow: inset 0 0 0 10px forestgreen;
+}

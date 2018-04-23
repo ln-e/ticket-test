@@ -5,7 +5,7 @@ export class Ticket {
 
   constructor(fieldSize = 45) {
     for (let i = 1; i <= fieldSize; i++) {
-      this.gameNumbers.push(new GameNumber(i + 1));
+      this.gameNumbers.push(new GameNumber(i));
     }
   }
 
