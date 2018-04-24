@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FieldComponent } from './field/field.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { FieldComponent } from './field/field.component';
     FieldComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

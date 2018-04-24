@@ -21,13 +21,23 @@ export class FieldComponent implements OnInit {
   }
 
   public toggleSelected(number: GameNumber): void {
-    number.selected = !number.selected;
+    const newSelected = !number.selected;
+    if (newSelected) {
+      if (this.ticket.selected.length < 6) {
+        number.selected = newSelected;
+      }
+    } else {
+      number.selected = newSelected;
+    }
   }
 
   public getBg(index, selected: boolean): string {
     const minPriority = 2; // минимум должно совпасть 3 числа чтобы получить хоть какую то прибыль
     const priority = this.priority.hasOwnProperty(index) ? this.priority[index] : 0;
-    if (priority < minPriority || this.ticket.selected.length === 0 || this.ticket.selected.length >= 6) {
+    if (!this.priority) {
+      return '#ebebeb';
+    }
+    if (priority < minPriority || this.ticket.selected.length >= 6) {
       return 'transparent';
     }
     const maxPriority = Object.keys(this.priority)
@@ -36,19 +46,12 @@ export class FieldComponent implements OnInit {
 
     const priorityResult = (priority - minPriority + 1) / (maxPriority - minPriority + 1) * 100;
 
-    return 'hsla(0,' + priorityResult + '%,60%,' + priorityResult/100 + ')'; // (priority - 1) / 6 * 100
+    return 'hsla(0,' + priorityResult + '%,60%,' + priorityResult / 100 + ')'; // (priority - 1) / 6 * 100
     // 6 - валидная комбинация // -1 потому что минимальная выигрышная комбинация 2 числа
   }
 
   public random(): void {
-    const random = {};
-    while (Object.keys(random).length < 6) {
-      random[Math.round(44 * Math.random() + 1)] = true;
-    }
-
-    this.ticket.gameNumbers.forEach((number: GameNumber) => {
-      number.selected = random.hasOwnProperty(number.index);
-    });
+    this.ticket.random();
   }
 
 }

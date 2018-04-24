@@ -1,21 +1,32 @@
+<h1>Гослото 6 из 45</h1>
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="slot">
+  <h2>Ваши билеты</h2>
+  <button (click)="generate()">Сгенерировать</button>
+  <input type="number" [(ngModel)]="ticketCount">
+  <span>рандомных билетов</span>
+  <br/>
+  <br/>
+  <br/>
+
+
   <app-field *ngFor="let ticket of tickets;" [ticket]="ticket"></app-field>
-
-
 
   <button (click)="addField()"> Добавить билет</button>
 </div>
 
 <div class="check matcher">
-  Отметьте выпадающие числа
+  <h2>Трансляция</h2>
+  <h3>Здесь вы можете отмечать выпадающие в прямом эфире числа</h3>
   <app-field [ticket]="ticketDraw" [priority]="priority"></app-field>
 </div>
 
 
-<div *ngIf="priority">
-  Совпадений по билетам:
-  <div *ngFor="let ticket of tickets; let i = index">
-    <b>{{ i + 1 }}</b> {{ matches(ticket) }}
+<div class="check matcher">
+  <div *ngIf="priority">
+    Совпадений по билетам:
+    <div *ngFor="let ticket of tickets; let i = index">
+      <b [ngClass]="{highlight: matches(ticket) >= 2}">{{ i + 1 }}</b> {{ matches(ticket) }}
+    </div>
   </div>
 </div>

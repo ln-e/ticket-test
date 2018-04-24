@@ -1,4 +1,12 @@
 .check,
 .slot {
   float: left;
+  /*border: 1px solid midnightblue;*/
+  background: rgba(127,127,127,0.035);
+  margin-right: 20px;
+  padding: 10px 30px;
+}
+
+.highlight {
+  background: rgba(250, 150, 20, 0.7);
 }

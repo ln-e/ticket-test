@@ -10,12 +10,13 @@ import {GameNumber} from './game-number';
 export class AppComponent implements DoCheck {
   public ticketDraw = new Ticket();
   public tickets: Ticket[] = [
-    new Ticket(),
-    new Ticket(),
+    new Ticket().random(),
+    new Ticket().random(),
   ];
   public valid = 6;
   public size = 45;
   public priority = {};
+  public ticketCount = 2;
 
   public mathFactorialCache = {};
 
@@ -25,10 +26,6 @@ export class AppComponent implements DoCheck {
 
   ngDoCheck() {
     const selected = this.ticketDraw.selected;
-    if (!selected.length) {
-      return;
-    }
-
 
     const numbersFromTickets = []
       .concat(...this.tickets.map((ticket: Ticket) => ticket.selected))
@@ -51,7 +48,6 @@ export class AppComponent implements DoCheck {
     this.tickets.forEach((ticket: Ticket) => {
       const countOfMatchedNumbers = this.matches(ticket);
       const countOfProbablyMatchedNumbers = countOfMatchedNumbers + numbersLeft; // сколько максимально в этом билете может совпасть
-      console.log('countOfMatchedNumbers', countOfMatchedNumbers, 'countOfProbablyMatchedNumbers', countOfProbablyMatchedNumbers, 'ticket.selected', ticket.selected);
       ticket.selected.forEach((number: GameNumber) => {
         priority[number.index] = Math.max(priority[number.index] || 0, countOfProbablyMatchedNumbers); // минус один потому что  минимальная комбинация чтобы выиграть 2 числа
         // if (isNaN(priority[number.index])) {
@@ -64,10 +60,8 @@ export class AppComponent implements DoCheck {
     // for (const prop of priority) {
     //   priority[prop] /= this.tickets.length;
     // }
-    console.log('after', priority);
 
     this.priority = priority;
-    console.log(priority);
     /*
     this.createPermutationArray(numberFromTicketsNotSelected, numbersLeft).forEach((combination) => {
       const suggestedCombination = combination.concat(...selected);
@@ -89,6 +83,22 @@ export class AppComponent implements DoCheck {
     this.priority = priority; /*Object.keys(priority).map((numberIndex) => {
       return {index: numberIndex, priority: priority[numberIndex]};
     });*/
+  }
+
+  generate() {
+    if (this.tickets.length > this.ticketCount) {
+      this.tickets.splice(this.ticketCount - 1);
+    } else {
+      while (this.tickets.length < this.ticketCount) {
+        const ticket = new Ticket();
+
+        this.tickets.push(ticket);
+      }
+    }
+
+    this.tickets.forEach((ticket) => {
+      ticket.random();
+    });
   }
 
   createPermutationArray(array: any[], count: number) {

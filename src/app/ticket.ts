@@ -12,4 +12,17 @@ export class Ticket {
   public get selected(): GameNumber[] {
     return this.gameNumbers.filter((gameNumber: GameNumber) => gameNumber.selected);
   }
+
+  public random(): this {
+    const random = {};
+    while (Object.keys(random).length < 6) {
+      random[Math.round(44 * Math.random() + 1)] = true;
+    }
+
+    this.gameNumbers.forEach((number: GameNumber) => {
+      number.selected = random.hasOwnProperty(number.index);
+    });
+
+    return this;
+  }
 }
