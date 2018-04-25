@@ -9,7 +9,6 @@
   <br/>
   <br/>
 
-
   <app-field *ngFor="let ticket of tickets;" [ticket]="ticket"></app-field>
 
   <button (click)="addField()"> Добавить билет</button>
@@ -24,9 +23,28 @@
 
 <div class="check matcher">
   <div *ngIf="priority">
+    Выигрышных билетов:
+    <div>
+      <b>6 совпадений</b>: {{ countOfMatches[6] }} билетов
+    </div>
+    <div>
+      <b>5 совпадений</b>: {{ countOfMatches[5] }} билетов
+    </div>
+    <div>
+      <b>4 совпадения</b>: {{ countOfMatches[4] }} билетов
+    </div>
+    <div>
+      <b>3 совпадений</b>: {{ countOfMatches[3] }} билетов
+    </div>
+    <div>
+      <b>2 совпадения</b>: {{ countOfMatches[2] }} билетов
+    </div>
+
+    <!--
     Совпадений по билетам:
     <div *ngFor="let ticket of tickets; let i = index">
       <b [ngClass]="{highlight: matches(ticket) >= 2}">{{ i + 1 }}</b> {{ matches(ticket) }}
     </div>
+    -->
   </div>
 </div>

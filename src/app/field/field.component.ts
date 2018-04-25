@@ -37,7 +37,7 @@ export class FieldComponent implements OnInit {
     if (!this.priority) {
       return '#ebebeb';
     }
-    if (priority < minPriority || this.ticket.selected.length >= 6) {
+    if (priority < minPriority || (!selected && this.ticket.selected.length >= 6)) {
       return 'transparent';
     }
     const maxPriority = Object.keys(this.priority)
@@ -46,7 +46,7 @@ export class FieldComponent implements OnInit {
 
     const priorityResult = (priority - minPriority + 1) / (maxPriority - minPriority + 1) * 100;
 
-    return 'hsla(0,' + priorityResult + '%,60%,' + priorityResult / 100 + ')'; // (priority - 1) / 6 * 100
+    return 'hsla(180,' + priorityResult + '%,30%,' + priorityResult / 100 + ')'; // (priority - 1) / 6 * 100
     // 6 - валидная комбинация // -1 потому что минимальная выигрышная комбинация 2 числа
   }
 

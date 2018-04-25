@@ -1,11 +1,11 @@
 .field_number {
   width: 45px;
   height: 45px;
-  background: #ebebeb;
-  border: 1px solid #ebebeb;
+  background: white;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid #ddd;
 }
 
 .field_number div{
@@ -17,7 +17,7 @@
 }
 
 .field_number.selected {
-  background: forestgreen;
+  background: #009999;
 }
 
 .zone {
@@ -27,6 +27,7 @@
 :host-context(.matcher) .field_number.selected {
   background: none;
 }
+
 :host-context(.matcher) .field_number.selected div {
-  box-shadow: inset 0 0 0 10px forestgreen;
+  box-shadow: inset 0 0 0 10px orangered;
 }

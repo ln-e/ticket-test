@@ -17,6 +17,7 @@ export class AppComponent implements DoCheck {
   public size = 45;
   public priority = {};
   public ticketCount = 2;
+  public countOfMatches = {};
 
   public mathFactorialCache = {};
 
@@ -39,10 +40,7 @@ export class AppComponent implements DoCheck {
       });
 
     const numbersLeft = this.valid - selected.length;
-
-    // console.log('numbersFromTickets', numbersFromTickets, this.valid - selected.length, numberFromTicketsNotSelected.length - selected.length);
     const countOfTickets = this.getMathCombinationOfASet(numbersLeft, numberFromTicketsNotSelected.length);
-    // console.log('нужно перебрать ', countOfTickets, numbersLeft, numberFromTicketsNotSelected.length);
 
     const priority = {};
     this.tickets.forEach((ticket: Ticket) => {
@@ -50,39 +48,15 @@ export class AppComponent implements DoCheck {
       const countOfProbablyMatchedNumbers = countOfMatchedNumbers + numbersLeft; // сколько максимально в этом билете может совпасть
       ticket.selected.forEach((number: GameNumber) => {
         priority[number.index] = Math.max(priority[number.index] || 0, countOfProbablyMatchedNumbers); // минус один потому что  минимальная комбинация чтобы выиграть 2 числа
-        // if (isNaN(priority[number.index])) {
-        //   priority[number.index] = 0;
-        // }
-        // priority[number.index] += countOfProbablyMatchedNumbers; // минус один потому что  минимальная комбинация чтобы выиграть 2 числа
       });
     });
-
-    // for (const prop of priority) {
-    //   priority[prop] /= this.tickets.length;
-    // }
 
     this.priority = priority;
-    /*
-    this.createPermutationArray(numberFromTicketsNotSelected, numbersLeft).forEach((combination) => {
-      const suggestedCombination = combination.concat(...selected);
 
-      this.tickets.forEach((ticket: Ticket) => {
-        const numbersInCommon = ticket.selected.reduce((prev, number: GameNumber) => {
-          const hasNumber = suggestedCombination.findIndex((suggested: GameNumber) => suggested.index === number.index) !== -1;
-          return prev + (hasNumber ? 1 : 0);
-        }, 0);
-        console.log(' при таких выпавших числах будет угаданно', numbersInCommon);
-        suggestedCombination.forEach((number: GameNumber) => {
-          priority[number.index] = Math.max(priority[number.index] || 0, numbersInCommon);
-        });
-      });
-      // console.log('suggestedCombination ', suggestedCombination );
+    this.countOfMatches = {6: 0, 5: 0, 4: 0, 3: 0, 2: 0};
+    this.tickets.forEach((ticket) => {
+      this.countOfMatches[this.matches(ticket)] += 1;
     });
-
-    console.log('priority ', priority);
-    this.priority = priority; /*Object.keys(priority).map((numberIndex) => {
-      return {index: numberIndex, priority: priority[numberIndex]};
-    });*/
   }
 
   generate() {
