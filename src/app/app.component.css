@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .check,
 .slot {
   float: left;
@@ -5,6 +9,29 @@
   background: rgba(127,127,127,0.035);
   margin-right: 20px;
   padding: 10px 30px;
+  width: 31%;
+  position: relative;
+}
+.slot {
+  width: 25%;
+}
+.check {
+  width: 55%;
+}
+.check ::ng-deep .zone {
+  background: #fff;
+}
+.check:nth-child(4) {
+  margin-top: 100px;
+  width: 55%;
+}
+
+img {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  margin-top: -10px;
 }
 
 .highlight {
